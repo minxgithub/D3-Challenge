@@ -71,8 +71,8 @@ function makeResponsive() {
                                      .attr("cx", d => xLinearScale(d.poverty))
                                      .attr("cy", d => yLinearScale(d.healthcare))
                                      .attr("r", "10")
-                                     .attr("class", "stateCircle")
-                                     .attr("opacity", ".8");
+                                     .attr("class", "stateCircle");
+                                     //.attr("opacity", ".8");
                     
                                      
         // add state abbr to circles
@@ -89,7 +89,7 @@ function makeResponsive() {
                   
         // initialize tool tip
         var toolTip = d3.tip()
-                        .attr("class", "tooltip")
+                        .attr("class", "d3-tip")
                         .offset([80, -60])
                         .html(function(d) {
                             return (`<strong>${d.state}</strong><br>Lacks Healthcare: ${d.healthcare}%<br>In Poverty: ${d.poverty}%`);
@@ -98,7 +98,7 @@ function makeResponsive() {
         chartGroup.call(toolTip);
 
         // create event listeners to display and hide the tooltip
-        circlesGroup.on("click", function(d) {
+        circlesGroup.on("mouseover", function(d) {
                        toolTip.show(d, this);
                     })
                     .on("mouseout", function(d, i) {
